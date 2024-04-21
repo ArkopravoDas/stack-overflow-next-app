@@ -20,8 +20,11 @@ interface QuestionProps {
   views: number;
   answers: Array<object>;
   createdAt: Date;
+  clerkId?: string;
 }
+
 const QuestionCard = ({
+  clerkId,
   _id,
   title,
   tags,
@@ -45,7 +48,7 @@ const QuestionCard = ({
           </Link>
         </div>
 
-        {/* If Signed in add edit delete options */}
+        {/* If signed in add edit delete actions */}
       </div>
 
       <div className="mt-3.5 flex flex-wrap gap-2">
@@ -53,19 +56,21 @@ const QuestionCard = ({
           <RenderTag key={tag._id} _id={tag._id} name={tag.name} />
         ))}
       </div>
+
       <div className="flex-between mt-6 w-full flex-wrap gap-3">
         <Metric
           imgUrl={author.picture}
-          alt="User"
+          alt="user"
           value={author.name}
           title={` - asked ${getTimeStamp(createdAt)}`}
           href={`/profile/${author._id}`}
           isAuthor
           textStyles="body-medium text-dark400_light700"
         />
+
         <Metric
           imgUrl="/assets/icons/like.svg"
-          alt="Upvote"
+          alt="Upvotes"
           value={formatAndDivideNumber(upvotes.length)}
           title=" Votes"
           textStyles="small-medium text-dark400_light800"
@@ -77,7 +82,6 @@ const QuestionCard = ({
           title=" Answers"
           textStyles="small-medium text-dark400_light800"
         />
-
         <Metric
           imgUrl="/assets/icons/eye.svg"
           alt="eye"
