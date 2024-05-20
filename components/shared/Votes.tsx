@@ -103,8 +103,8 @@ const Votes = ({
       }
 
       return toast({
-        title: `Downvote ${!hasupVoted ? "Successful" : "Removed"}`,
-        variant: !hasupVoted ? "default" : "destructive",
+        title: `Downvote ${!hasdownVoted ? "Successful" : "Removed"}`,
+        variant: !hasdownVoted ? "default" : "destructive",
       });
     }
   };
