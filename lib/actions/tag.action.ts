@@ -38,8 +38,7 @@ export async function getAllTags(params: GetAllTagsParams) {
   try {
     connectToDatabase();
 
-    const { searchQuery, filter, page = 1, pageSize = 5 } = params;
-
+    const { searchQuery, filter, page = 1, pageSize = 10 } = params;
     const skipAmount = (page - 1) * pageSize;
 
     const query: FilterQuery<typeof Tag> = {};
@@ -63,6 +62,7 @@ export async function getAllTags(params: GetAllTagsParams) {
       case "old":
         sortOptions = { createdAt: 1 };
         break;
+
       default:
         break;
     }
@@ -88,7 +88,6 @@ export async function getQuestionsByTagId(params: GetQuestionsByTagIdParams) {
     connectToDatabase();
 
     const { tagId, page = 1, pageSize = 10, searchQuery } = params;
-
     const skipAmount = (page - 1) * pageSize;
 
     const tagFilter: FilterQuery<ITag> = { _id: tagId };
@@ -102,7 +101,7 @@ export async function getQuestionsByTagId(params: GetQuestionsByTagIdParams) {
       options: {
         sort: { createdAt: -1 },
         skip: skipAmount,
-        limit: pageSize + 1, // +1 to check if there's a next page
+        limit: pageSize + 1, // +1 to check if there is next page
       },
       populate: [
         { path: "tags", model: Tag, select: "_id name" },
