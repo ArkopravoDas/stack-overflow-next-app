@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   description:
     "DevFlux is a community-driven platform for developers to ask and answer programming questions. Explore new topics in web development, DSA, mobile app development etc. Get help, share knowledge and collab with other developers.",
   icons: {
-    icon: "/assets/images/site-logo.svg",
+    icon: "/assets/images/code-logo-32-meta.png",
   },
 };
 

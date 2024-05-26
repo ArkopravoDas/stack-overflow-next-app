@@ -73,7 +73,7 @@ const JobCard = ({ job }: { job: Job }) => {
           </Link>
         ) : (
           <Image
-            src="/assets/images/site-logo.svg"
+            src="/assets/images/code-logo.png"
             alt="default site logo"
             width={64}
             height={64}
