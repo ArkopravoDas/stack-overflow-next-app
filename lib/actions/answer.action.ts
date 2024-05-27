@@ -182,17 +182,21 @@ export async function deleteAnswer(params: DeleteAnswerParams) {
 
     const { answerId, path } = params;
 
-    const answer = await Answer.findById(answerId);
+    const answer = await Answer.findById({ _id: answerId });
 
     if (!answer) {
-      throw new Error("Answer not found");
+      throw new Error("Answer not found.");
     }
 
-    await answer.deleteOne({ _id: answerId });
+    await Answer.deleteOne({ _id: answerId });
+
+    // update answers field of that question
     await Question.updateMany(
       { _id: answer.question },
       { $pull: { answers: answerId } }
     );
+
+    // delete all interactions related to the question
     await Interaction.deleteMany({ answer: answerId });
 
     revalidatePath(path);
